@@ -1,0 +1,35 @@
+digraph Promethean {
+  "Product Owner"
+  "Product Architect"
+  "Lead User Experience Designer"
+  "Lead Front-End Designer"
+  "Protocol Engineer"
+  "Marketing Specialist"
+  "Graphic Designer"
+  
+  "Product Owner" -> {
+    "Product Architect"
+    "Lead User Experience Designer"
+  }
+
+  "Product Architect" -> "Lead User Experience Designer"
+  "Lead User Experience Designer" -> "Marketing Specialist"
+  
+  subgraph cluster_internal {
+    label = "strike team"
+  
+    "Lead User Experience Designer" -> "Lead Front-End Designer"
+    "Marketing Specialist" -> "Graphic Designer"
+
+    "Product Architect" -> {
+      "Lead Front-End Designer" -> {
+        "Protocol Engineer"
+      }
+    }
+  }
+
+  # deploy
+  "Marketing Specialist" -> "Operations"
+  "Protocol Engineer" -> "Operations"
+
+}

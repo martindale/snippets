@@ -1,0 +1,101 @@
+# PlayNet Application Resource Contract (ARC)
+# Version 0.1
+# 2017-08-01 ~~ Eric Martindale
+digraph Resources {
+  # flow from Left to Right (LR) for visual ease
+  rankdir = "LR"
+
+  # a list of Make-made resources on the current web
+  # these will need to be instrumented with tests!
+  subgraph cluster_WWW {
+    label = "WWW"
+    "soundtrack.io/people"
+    "soundtrack.io/tracks"
+    "soundtrack.io/artists"
+    "soundtrack.io/rooms"
+    "soundtrack.io/plays"
+    
+    "roleplaygateway.com/people"
+    "roleplaygateway.com/universes"
+    "roleplaygateway.com/places"
+    "roleplaygateway.com/quests"
+    "roleplaygateway.com/characters"
+    "roleplaygateway.com/artifacts"
+    "roleplaygateway.com/achievements"
+    "roleplaygateway.com/vehicles"
+
+    "maki.io/people"
+    "chat.fabric.fm/people"
+    "matrix.fabric.fm/identities"
+  }
+
+  # resource mapping, data flow
+
+  # soundtrack.io
+  "soundtrack.io/people" -> "/people"
+
+  "soundtrack.io/tracks" -> "soundtrack/tracks"
+  "soundtrack.io/artists" -> "soundtrack/artists"
+  "soundtrack.io/rooms" -> "soundtrack/stations"
+  "soundtrack.io/plays" -> "soundtrack/plays"
+
+  # roleplaygateway.com
+  "roleplaygateway.com/people" -> "/people"
+
+  "roleplaygateway.com/universes" -> "rpg/universes"
+  "roleplaygateway.com/places" -> "rpg/places"
+  "roleplaygateway.com/quests" -> "rpg/quests"
+  "roleplaygateway.com/characters" -> "rpg/characters"
+  "roleplaygateway.com/artifacts" -> "rpg/artifacts"
+  "roleplaygateway.com/achievements" -> "rpg/achievements"
+  "roleplaygateway.com/vehicles" -> "rpg/vehicles"
+
+  # extraneous (needs more work)
+  "maki.io/people" -> "/people"
+  "chat.fabric.fm/people" -> "/people"
+  "matrix.fabric.fm/identities" -> "/identities"
+  
+  # human interaction required
+  subgraph cluster_processes {
+    "/people" -> "/identities" [label = "key generation\n(interactive)"]
+  }
+
+  # soundtrack swarm
+  subgraph cluster_soundtrack {
+    # community discussions located in...
+    label = "#soundtrack"
+    {
+      "soundtrack/tracks"
+      "soundtrack/plays"
+      "soundtrack/artists"
+      "soundtrack/stations"
+    } -> "soundtrack"
+  }
+
+  # rpg swarm
+  subgraph cluster_rpg {
+    # community discussions located in...
+    label = "#rpg"
+    {
+      "rpg/universes"
+      "rpg/places"
+      "rpg/quests"
+      "rpg/characters"
+      "rpg/artifacts"
+      "rpg/achievements"
+      "rpg/vehicles"
+    } -> "rpg"
+  }
+
+  # contract publishing
+  {
+    # resources
+    "/identities"
+    "/people"
+    
+    # namespaces
+    "soundtrack"
+    "rpg"
+  } -> "fabric://" [label = "contract publish"]
+
+}

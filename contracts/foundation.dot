@@ -1,0 +1,47 @@
+digraph Foundation {
+  label = "\n\n\nFOUNDATION status, as of August 16th, 2017"
+
+  {
+    label = "Founders"
+    "Private"
+    "Pre-ICO"
+  } -> "ICO SPV"
+
+  "Crowdfunding" -> "ICO SPV"
+
+  "The Next Web Foundation" -> {
+    "Fabric SPV"
+    "Qodam SPV"
+    "Soundtrack SPV"
+    "Verse SPV"
+    "..."
+  }
+  
+  {
+    "Qodam SPV"
+    "Soundtrack SPV"
+    "Verse SPV"
+    "..."
+  } -> "The Next Web Foundation"
+
+  "ICO SPV" -> "The Next Web Foundation"
+
+  "Fabric SPV" -> "Community"
+  "Fabric SPV" -> {"Quill", "(...)"}
+  "Qodam SPV" -> "(...)"
+
+  subgraph cluster_qodam {
+    label = "Qodam"
+    "Qodam SPV" -> {
+      "1st Project"
+      "All others..."
+    }
+  }
+
+  subgraph cluster_strike {
+    label = "prometheus"
+    "Quill"
+    "Fabric SPV"
+  }
+
+}
