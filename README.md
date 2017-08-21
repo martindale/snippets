@@ -1,5 +1,11 @@
 # Fabric Sync
-This folder is shared with the team, so let's make sure to help keep it tidy.
+This folder is shared with the world, so let's make sure to help keep it tidy.
+
+## Before Continuing
+Go ahead and create a new folder in `homes`, matching your username.  This is
+important, as it will reserve your name in the upcoming FabricOS default filesystem.
+
+For example, I created `homes/martindale` as it matches my public handle.
 
 ## Confidential Information
 Anything contained within this directory should be considered confidential, and
